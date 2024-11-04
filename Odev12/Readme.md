@@ -21,10 +21,11 @@ Aşağıdaki sorgu senaryolarını dvdrental örnek veri tabanı üzerinden ger�
 **4.payment tablosunda en fazla sayıda alışveriş yapan müşterileri(customer) sıralayınız.
 
 ```sql
-   select customer.customer_id, customer.first_name , customer.last_name , amount 
+   select customer.customer_id, customer.first_name , customer.last_name , sum(amount) 
    from customer 
-   inner join payment on payment.customer_id = customer.customer_id 
-   where payment.amount = (select max(amount) from payment) order by first_name;
+   join payment on payment.customer_id = customer.customer_id 
+   group by customer.customer_id, customer.first_name , customer.last_name 
+   order by sum(amount) desc;
    ```
 
 Soruyu yanlış anlamış olma ihtimalime karşı ikinci alternatif;

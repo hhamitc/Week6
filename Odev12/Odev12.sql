@@ -1,17 +1,18 @@
---1.actor ve customer tablolarında bulunan first_name sütunları için tüm verileri sıralayalım.
+--1.film tablosunda film uzunluğu length sütununda gösterilmektedir. Uzunluğu ortalama film uzunluğundan fazla kaç tane film vardır?
 
---(select first_name from actor) union (select first_name from customer);
+--Select Count(*) from film where length > (select avg(length) from film );
 
---2.actor ve customer tablolarında bulunan first_name sütunları için kesişen verileri sıralayalım.
+--2.film tablosunda en yüksek rental_rate değerine sahip kaç tane film vardır?
 
---(select first_name from actor) intersect (select first_name from customer)
+--select Count(*) from film where rental_rate = (select max(rental_rate) from film)
 
---3.actor ve customer tablolarında bulunan first_name sütunları için ilk tabloda bulunan ancak ikinci tabloda bulunmayan verileri sıralayalım. 
+--3.film tablosunda en düşük rental_rate ve en düşün replacement_cost değerlerine sahip filmleri sıralayınız.
 
---(select first_name from actor) except (select first_name from customer)
+--select * from film where rental_rate = (select min(rental_rate)from film) and replacement_cost =(select min(replacement_cost)from film);
 
---4.İlk 3 sorguyu tekrar eden veriler için de yapalım.
+--4.payment tablosunda en fazla sayıda alışveriş yapan müşterileri(customer) sıralayınız.
 
---(select first_name from actor) union all (select first_name from customer);
---(select first_name from actor) intersect all (select first_name from customer)
---(select first_name from actor) except all (select first_name from customer)
+--select customer.customer_id, customer.first_name , customer.last_name , sum(amount) from customer join payment on payment.customer_id = customer.customer_id group by customer.customer_id, customer.first_name , customer.last_name order by sum(amount) desc;
+
+--select customer.customer_id, customer.first_name , customer.last_name ,Count(*) from payment inner join customer on payment.customer_id = customer.customer_id group by customer.customer_id, customer.first_name , customer.last_name order by Count(*) desc;
+
