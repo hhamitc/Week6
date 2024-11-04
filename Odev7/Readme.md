@@ -19,12 +19,6 @@
 --select store_id,Count(store_id) from customer group by store_id;
    ```
 
-**4. film tablosunda bulunan filmlerin uzunluğu 150 dakikadan büyük olanlarına ait kaç farklı replacement_cost değeri vardır?
-
-```sql
-  select Count(distinct(replacement_cost)) from film where length > 150;
-   ```
-
 **4.city tablosunda bulunan şehir verilerini country_id sütununa göre gruplandırdıktan sonra en fazla şehir sayısı barındıran country_id bilgisini ve şehir sayısını paylaşınız.
 
 ```sql
